@@ -1,25 +1,18 @@
 {
-  "name": "langlearn",
+  "name": "lan",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:backend": "cd backend node index.js",
-    "start:frontend": "cd react/client && npm start",
-    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\""
+    "start": "concurrently \"npm run start-backend\" \"npm run start-frontend\"",
+    "start-backend": "cd backend && npm start",
+    "start-frontend": "cd frontend && npm start",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "rashmita",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@types/react-router-dom": "^5.3.3",
-    "axios": "^1.6.8",
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.20.2",
-    "concurrently": "^8.2.2",
-    "express": "^4.19.2",
-    "express-validator": "^7.0.1",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.3.0",
-    "react-router-dom": "^6.22.3"
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   }
 }

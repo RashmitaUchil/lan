@@ -6,7 +6,7 @@ const InitiateMongoServer = require("./config/db");
 InitiateMongoServer();
 
 const app = express();
-const PORT= 3000;
+const PORT= 8081;
 //const User = mongoose.model('user',UserSchema);
 app.use(bodyParser.json());
 
