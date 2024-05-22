@@ -6,7 +6,7 @@ const InitiateMongoServer= async()=>{
         await mongoose.connect(mongoUrl, {
             useNewUrlParser: true
         });
-        console.log("Connected to BD!!");
+        console.log("Connected to Database!!");
     }
     catch(e)
     {

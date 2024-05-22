@@ -19,9 +19,10 @@ const Login = () => {
     // Add login logic here
     console.log(formData);
     // Redirect to dashboard or desired page after login
-    navigate('/dashboard');
+    navigate('/LanguagesPage');
   };
 
+ 
   return (
     <div className="login-container">
       <h2>Login</h2>
