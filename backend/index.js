@@ -4,11 +4,11 @@ const user = require("./routes/user");
 const language = require("./routes/language");
 const InitiateMongoServer = require("./config/db");
 const cors= require('cors');
-app.use(cors())
 
 InitiateMongoServer();
 
 const app = express();
+app.use(cors());
 const PORT= 8081;
 //const User = mongoose.model('user',UserSchema);
 app.use(bodyParser.json());

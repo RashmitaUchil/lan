@@ -9,6 +9,7 @@ const router = express.Router();
 const User = require("../model/User");
 
 
+
 router.post(
     "/signup",
     [
