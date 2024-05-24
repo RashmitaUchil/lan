@@ -5,10 +5,11 @@ const language = require("./routes/language");
 const InitiateMongoServer = require("./config/db");
 const cors= require('cors');
 
+
 InitiateMongoServer();
 
 const app = express();
-app.use(cors());
+app.use(cors())
 const PORT= 8081;
 //const User = mongoose.model('user',UserSchema);
 app.use(bodyParser.json());
