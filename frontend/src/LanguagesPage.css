@@ -1,0 +1,53 @@
+.language-cards-list {
+    list-style-type: none;
+    padding: 0;
+  }
+
+.language-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .language-card {
+    width: 600px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .language-card-header {
+    background-color: #f5f5f5;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .language-card-body {
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .language-card-body img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .language-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .language-name {
+    flex-grow: 1;
+  }
+
+  .language-card-content {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f5f5f5;
+  }
