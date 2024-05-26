@@ -24,13 +24,11 @@ router1.post( "/select_language", async (req, res) => {
   });
   await user.languages.push(languageId)
   res.status(200).json({
-    message : 'language updated succesfully'
+    message : 'language updated successfully'
   })
 }catch(err){
   res.status(400)
 }   
 });
 
-
-  
   module.exports = router1;
