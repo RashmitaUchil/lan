@@ -1,6 +1,7 @@
 const express = require("express");
 const { validationResult } = require('express-validator');
 const { check } = require('express-validator');
+const {v4}= require ("uuid");
 
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -32,9 +33,10 @@ router.post(
         }
 
         const {
-            username,
-            email,
-            password
+            username:username,
+            email:email,
+            password:password,
+            
         } = req.body;
         try {
             let user = await User.findOne({
@@ -54,12 +56,15 @@ router.post(
                     msg: "Username Already Exists"
                 });
             }
-
-            user = new User({
-                username,
-                email,
-                password
-            });
+            const userId = await v4();
+          
+                user = new User({
+                username : username,
+                email :email,
+                password : password,
+                user_id : userId
+                
+            });
 
             const salt = await bcrypt.genSalt(10);
             user.password = await bcrypt.hash(password, salt);
@@ -111,8 +116,10 @@ router.post(
       const { email, password } = req.body;
     try {
       let user = await User.findOne({
+
         email
       });
+      
       if (!user)
         return res.status(400).json({
           message: "User Does Not Exist"
@@ -137,8 +144,8 @@ router.post(
         },
         (err, token) => {
           if (err) throw err;
-          req.session.username=result[0].username;
-          console.log(req.session.username);
+          req.session.userId=user.user_id;
+          console.log(req.session.userId);
           res.status(200).json({
             token
           });
