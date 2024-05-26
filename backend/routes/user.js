@@ -5,8 +5,11 @@ const { check } = require('express-validator');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
+const session= require('express-session');
+const cookieParser= require('cookie-parser');
 
 const User = require("../model/User");
+
 
 
 router.post(
@@ -100,6 +103,7 @@ router.post(
       const errors = validationResult(req);
   
       if (!errors.isEmpty()) {
+        
         return res.status(400).json({
           errors: errors.array()
         });
@@ -133,6 +137,8 @@ router.post(
         },
         (err, token) => {
           if (err) throw err;
+          req.session.username=result[0].username;
+          console.log(req.session.username);
           res.status(200).json({
             token
           });

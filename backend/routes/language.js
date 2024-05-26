@@ -12,6 +12,23 @@ router1.get(
       console.error(err.message);
       res.status(500).send("Server error");
     }
+});
+
+router1.post( "/select_language", async (req, res) => {
+  try{
+  const userId = req.body.userId
+  const languageId = req.body.languageId
+
+  const user = await User.findOne({
+    "user_id" : userId,
   });
-  
+  await user.languages.push(languageId)
+  res.status(200).json({
+    message : 'language updated successfully'
+  })
+}catch(err){
+  res.status(400)
+}   
+});
+
   module.exports = router1;

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const mongoUrl ="mongodb+srv://rashmitauchil20212:LangLearn@cluster0.zxjqrvl.mongodb.net/";
+
 const InitiateMongoServer= async()=>{
     try
     {
