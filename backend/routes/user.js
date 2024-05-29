@@ -1,6 +1,7 @@
 const express = require("express");
 const { validationResult } = require('express-validator');
 const { check } = require('express-validator');
+const { v4  } = require('uuid');
 
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -54,11 +55,14 @@ router.post(
                     msg: "Username Already Exists"
                 });
             }
-
+            const userId   = await v4();
+          
             user = new User({
-                username,
-                email,
-                password
+                username : username,
+                email :email,
+                password : password,
+                user_id : userId
+                
             });
 
             const salt = await bcrypt.genSalt(10);
@@ -137,7 +141,7 @@ router.post(
         },
         (err, token) => {
           if (err) throw err;
-          req.session.username=result[0].username;
+          req.session.username =result[0].username;
           console.log(req.session.username);
           res.status(200).json({
             token
