@@ -25,7 +25,12 @@ function App() {
     .catch(err=>console.log(err))
   })
   return (
+<<<<<<< HEAD
     
+=======
+    <Router>
+      
+>>>>>>> 50eefe5421d818a2516dd991bbd26b8a85195c4f
       <Routes>
         <Route path="/" element={<SignUp/>} />
         <Route path="/login" element={<Login />} />
