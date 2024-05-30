@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
 import './SignUp.css';
@@ -18,6 +19,12 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    axios.post('http://localhost:8081/user/signup',formData)
+    .then(res=>{
+          navigate('/login');
+        
+    })
+    .catch(err=>console.log(err));
     console.log(formData);
   };
 
@@ -60,8 +67,8 @@ const SignUp = () => {
             </div>
             <button type="submit">Sign Up</button>
           </form>
-          <div>
-            {/* Link to the login page */}
+          {/* <div>
+            Link to the login page
             <p>
               Already have an account?{' '}
               <a href="/login" onClick={
@@ -71,7 +78,7 @@ const SignUp = () => {
               </a>
               .
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

@@ -145,9 +145,10 @@ router.post(
         (err, token) => {
           if (err) throw err;
           req.session.userId=user.user_id;
-          console.log(req.session.userId);
           res.status(200).json({
-            token
+            token,
+           
+
           });
         }
       );

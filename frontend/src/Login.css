@@ -4,8 +4,19 @@
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+    border-radius: 20px;
+    background-color: #f7f7f7;
+   }
+  .background {
+    background-image: url("https://static.vecteezy.com/system/resources/previews/006/817/444/original/modern-3d-online-languages-learning-class-language-courses-banner-template-for-website-and-mobile-app-development-literal-translation-personal-assistant-e-learning-concept-illustration-free-vector.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    background-position: center; /* Center the background image */
+    flex: 1; /* Take remaining space */
+    display: flex;
+    justify-content: start;
+    align-items: center;
   }
   
   .login-form .form-group {
@@ -15,14 +26,17 @@
   .login-form label {
     display: block;
     font-weight: bold;
+    
   }
   
   .login-form .form-control {
     width: 100%;
+    max-width: 370px;
     padding: 10px;
     font-size: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid #fdfdfd;
     border-radius: 5px;
+    background-color: rgb(241, 212, 233);
   }
   
   .btn-login {

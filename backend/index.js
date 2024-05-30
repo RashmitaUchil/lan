@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require("body-parser");
 const user = require("./routes/user");
 const language = require("./routes/language");
+const questions = require("./routes/questions");
 const InitiateMongoServer = require("./config/db");
 const cors= require('cors');
 const session= require('express-session');
@@ -10,11 +11,18 @@ const cookieParser= require('cookie-parser');
 InitiateMongoServer();
 
 const app = express();
-app.use(cors())
+app.use(cors({
+  origin:["http://localhost:3000"], 
+  methods:["POST","GET"],
+  credentials: true
+}))
 const PORT= 8081;
 //const User = mongoose.model('user',UserSchema);
 app.use(bodyParser.json());
 app.use(cookieParser());
+
+
+
 app.use(session({
   secret:'secret',
   resave: false,
@@ -28,11 +36,20 @@ app.use(session({
 }))
 
 app.get("/", (req, res) => {
-    res.json({ message: "API Working" });
+  if(req.session.userId)
+    {
+      return res.json({valid: true, user_id: req.session.userId})
+
+    }
+    else{
+      return res.json({ valid: false});
+    }
+    
   });
 
 app.use("/user", user);
 app.use("/language", language); 
+app.use("/questions", questions);
 app.listen(PORT, (req, res) => {
   console.log('Server Started at PORT ${PORT}');
 });

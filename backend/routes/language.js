@@ -16,9 +16,9 @@ router1.get(
 
 router1.post( "/select_language", async (req, res) => {
   try{
-  const userId = req.body.user_id
-  const languageId = req.body.langauge_id
-
+  const userId = req.session.user_id
+  const languageId = req.body.l_id
+  console.log(userId);
   const user = await User.findOne({
     "user_id" : userId,
   });

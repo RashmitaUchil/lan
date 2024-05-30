@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useState, useEffect } from 'react';
 import './LanguagesPage.css';
 
@@ -19,13 +20,21 @@ function LanguageList() {
       console.log(response);
     }
 
+    const handleClick = async (l_id) => {
+      try {
+          const response = await axios.post('http://localhost:5000/language/select_language', { l_id });
+          console.log('Response:', response.data);
+      } catch (error) {
+          console.error('There was an error sending the ID:', error.message);
+      }
+  };
   return (
  
     <div><center><h1>Select The Language</h1></center>
     <div className="language-cards-container">
       <ul className="language-cards-list">
         {languages.map((language) => (
-          <li className="language-card-item" key={language.l_id}>
+          <li className="language-card-item" key={language.l_id} onClick={() => handleClick(language.l_id)}>
             <div className="language-card">
               <div className="language-card-content">
                 <h3><i>{language.lang_name}</i></h3>
