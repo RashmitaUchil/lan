@@ -1,10 +1,13 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react';
 import './LanguagesPage.css';
+import { useUser } from './context/userContext.js';
+
 
 function LanguageList() {
-  const [languages, setLanguages] = useState([]);
+  const { userId } = useUser();
 
+  const [languages, setLanguages] = useState([]);
 
 
  useEffect(()=>
@@ -22,8 +25,12 @@ function LanguageList() {
 
     const handleClick = async (l_id) => {
       try {
-          const response = await axios.post('http://localhost:5000/language/select_language', { l_id });
-          console.log('Response:', response.data);
+        console.log(userId)
+          const response = await axios.post('http://localhost:8081/language/select_language', { 
+            user_id : userId,
+            l_id : l_id
+          });
+          
       } catch (error) {
           console.error('There was an error sending the ID:', error.message);
       }

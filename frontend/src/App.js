@@ -6,37 +6,40 @@ import LanguagesPage from './LanguagesPage.js'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Imported BrowserRouter as Router and corrected Routes import
 import Login from './Login';
 import { useEffect,useState } from 'react';
+import { useUser } from './context/userContext.js';
+
 
 function App() {
-  const [id, setId]= useState('')
+  const { userId, setUserId } = useUser();
   const navigate=useNavigate()
   useEffect(()=>{
+
     axios.get('http://localhost:8081')
     .then(res=>{
       if(res.data.valid)
         {
-          setId(res.data.user_id);
+          console.log('ssss')
+          setUserId(res.data.user_id);
+          navigate("/languagePage")
         }
         else
         {
-          navigate("/languagePage")
+          console.log('dddd')
+          
         }
     })
     .catch(err=>console.log(err))
   })
   return (
-<<<<<<< HEAD
-    
-=======
-    <Router>
+  
       
->>>>>>> 50eefe5421d818a2516dd991bbd26b8a85195c4f
       <Routes>
         <Route path="/" element={<SignUp/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/languagePage" element={<LanguagesPage/>} />
 
       </Routes>
+     
    
   );
 }

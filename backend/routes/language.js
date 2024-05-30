@@ -2,6 +2,7 @@ const express = require("express");
 const router1 = express.Router();
 
 const Language = require("../model/Language");
+const User = require("../model/User");
 
 router1.get(
   "/get_languages", async (req, res) => {
@@ -16,18 +17,26 @@ router1.get(
 
 router1.post( "/select_language", async (req, res) => {
   try{
-  const userId = req.session.user_id
+  const userId = req.body.user_id
   const languageId = req.body.l_id
-  console.log(userId);
-  const user = await User.findOne({
-    "user_id" : userId,
-  });
-  await user.languages.push(languageId)
+  
+ 
+   const user = await User.findOneAndUpdate(
+     { user_id : userId},
+    { $push: { languages: languageId } },
+    { new: true, useFindAndModify: false }
+);
+if(user == null){
+  console.log('user not found')
+}
+
+  
   res.status(200).json({
     message : 'language updated successfully'
   })
 }catch(err){
-  res.status(400)
+  console.log(err.message)
+  return res.status(400)
 }   
 });
 
