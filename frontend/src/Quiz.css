@@ -1,66 +1,70 @@
-/* Quiz.css */
-.quiz-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
+
+.question-list-container {
+  width: 900px;
+  height: 800px;
+  margin:  auto;
+  margin-top:150px;
+  padding: 40px 50px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  gap:20px;
+
+}
+
+.question-list-container hr{
+  height:2px;
+  border: 1px solid #ccc;
+  background: plum;
+}
+
+.question-list-container h2{
   
-  .quiz-container h2 {
-    text-align: center;
-    color: #333;
-  }
-  
-  .question {
-    margin-bottom: 20px;
-  }
-  
-  .question p {
-    font-size: 1.1em;
-    color: #444;
-  }
-  
-  .options {
-    margin-top: 10px;
-  }
-  
-  .option {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .option input {
-    margin-right: 10px;
-  }
-  
-  button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  .score-container {
-    text-align: center;
-  }
-  
-  .score-container h2 {
-    color: #4caf50;
-  }
-  
-  .score-container button {
-    margin-top: 20px;
-  }
-  
+  font-size: 28px;
+  font-weight: 500;
+
+}
+
+.question-list-container ul li{
+  display:flex;
+  align-items: center;
+  height: 70px;
+  padding-left:15px ;
+  border: 1px solid rgb(209, 16, 187);
+  border-radius: 8px;
+  margin-bottom:20px;
+  font-size:20px;
+  cursor: pointer;
+
+}
+
+.question-list-container button{
+  margin: auto;
+  width: 250px;
+  height: 65px;
+  background: plum;
+  color: black;
+  font-size: 25px;
+  font-weight: 500;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.question-list-container .index{
+  margin:auto;
+  font-size: 18px;
+}
+
+.correct{
+  background: rgb(133, 233, 209);
+  border-color:rgb(58, 212, 160)
+
+}
+
+.wrong{
+  background: #eb3939;
+  border-color: red;
+}
