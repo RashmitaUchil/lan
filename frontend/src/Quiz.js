@@ -1,89 +1,116 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import './Quiz.css';
+import axios from 'axios';
+import { useLanguageId } from './context/languageIdContext';
 
-function Quiz() {
+function QuizPage() {
+  const [index, setIndex] = useState(0);
   const [questions, setQuestions] = useState([]);
-  const [answers, setAnswers] = useState({});
-  const [score, setScore] = useState(null);
-  const [submitted, setSubmitted] = useState(false);
+  const [lock, setLock] = useState(false);
+  const [score, setScore] = useState(0);
+  const [result, setResult] = useState(false);
+  const { languageId }= useLanguageId();
+
+  const optionRefs = useRef([]);
+
+  const checkAns = (e, selectedIdx) => {
+    if (lock === false) {
+      const correctOptionIndex = questions[index].options.indexOf(questions[index].answer);
+      
+      if (selectedIdx === correctOptionIndex) {
+        e.target.classList.add('correct');
+        setScore((prev) => prev + 1);
+      } else {
+        e.target.classList.add('wrong');
+        if (optionRefs.current[correctOptionIndex]) {
+          optionRefs.current[correctOptionIndex].classList.add('correct');
+        }
+      }
+      setLock(true);
+    }
+  };
+
+  const next = () => {
+    if (lock === true) {
+      if (index === questions.length - 1) {
+        setResult(true);
+        return;
+      }
+      setIndex((prevIndex) => prevIndex + 1);
+      setLock(false);
+      optionRefs.current.forEach((option) => {
+        if (option) {
+          option.classList.remove('wrong');
+          option.classList.remove('correct');
+        }
+      });
+    }
+  };
+
+  const reset = () => {
+    setIndex(0);
+    setScore(0);
+    setLock(false);
+    setResult(false);
+  };
 
   useEffect(() => {
-    fetch('http://localhost:8081/questions/get_questions')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+    const fetchQuestions = async () => {
+      try {
+        console.log(languageId)
+        const response = await axios.get('http://localhost:8081/questions/get_questions',{
+        params : {
+          l_id: languageId
+        }  }   );
+        if (Array.isArray(response.data)) {
+          setQuestions(response.data);
+        } else {
+          console.error('Invalid data format:', response.data);
         }
-        return response.json();
-      })
-      .then(data => {
-        console.log(data);
-        setQuestions(data);
-        console.log(`questions ${questions}`)
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
+      } catch (error) {
+        console.error('Error fetching questions:', error);
+      }
+    };
+
+    fetchQuestions();
   }, []);
 
-  const handleChange = (e, question) => {
-    setAnswers({
-      ...answers,
-      [question]: e.target.value
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let newScore = 0;
-
-    questions.forEach(question => {
-      if (answers[question.option] === question.answer) {
-        newScore += 1;
-      }
-    });
-
-    setScore(newScore);
-    setSubmitted(true);
-  };
-
-  if (submitted) {
-    return (
-      <div className="quiz-container score-container">
-        <h2>Your Score: {score} / {questions.length}</h2>
-        <button onClick={() => window.location.reload()}>Try Again</button>
-      </div>
-    );
+  if (questions.length === 0) {
+    return <div>Loading...</div>; // Add a loading state
   }
 
+  const currentQuestion = questions[index];
+
   return (
-    <div className="quiz-container">
-      <h2>Quiz</h2>
-      <form onSubmit={handleSubmit}>
-        {questions.map((question, index) => (
-          <div key={question.question} className="question">
-            <p>{index + 1}. {question.question}</p>
-            <div className="options">
-              {question.options.map((option, optionIndex) => (
-                <div key={optionIndex} className="option">
-                  <label>
-                    <input
-                      type="radio"
-                      name={question._id}
-                      value={option}
-                      onChange={(e) => handleChange(e, question._id)}
-                      required
-                    />
-                    {option}
-                  </label>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
-        <button type="submit">Submit</button>
-      </form>
+    <div className='question-list-container'>
+      <h1>QUIZ</h1>
+      <hr />
+      {!result ? (
+        <>
+          <h2>{index + 1}. {currentQuestion.question}</h2>
+          <ul>
+            {currentQuestion.options.map((option, idx) => (
+              <li
+                ref={(el) => optionRefs.current[idx] = el}
+                onClick={(e) => { checkAns(e, idx); }}
+                key={idx}
+                className="option-item"
+              >
+                {option}
+              </li>
+            ))}
+          </ul>
+          <button onClick={next}>Next</button>
+          <div className='index'>{index + 1} of {questions.length} questions</div>
+        </>
+      ) : (
+        <>
+          <h2>Score: {score} out of {questions.length}</h2>
+          <button onClick={reset}>Reset</button>
+        </>
+      )}
     </div>
   );
 }
 
-export default Quiz;
+export default QuizPage;

@@ -2,9 +2,11 @@ import axios from 'axios'
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css'; // Import CSS file for login page styling
+import { useUser } from './context/userContext';
 
 
 const Login = () => {
+  const { userId, setUserId } = useUser()
   const [formData, setFormData] = useState({
     email: '',
     password: '',

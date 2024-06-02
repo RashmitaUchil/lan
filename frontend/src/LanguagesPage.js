@@ -2,13 +2,39 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react';
 import './LanguagesPage.css';
 import { useUser } from './context/userContext.js';
-
+import { useNavigate } from 'react-router-dom';
+import { useLanguageId } from './context/languageIdContext.js';
 
 function LanguageList() {
-  const { userId } = useUser();
+  const { userId,setUserId } = useUser();
+
+
+  const { languageId, setLanguageId } = useLanguageId();
+  
 
   const [languages, setLanguages] = useState([]);
+  const navigate = useNavigate();
 
+  useEffect(()=>{
+
+    axios.get('http://localhost:8081')
+    .then(res=>{
+      if(res.data.valid) {
+          setUserId(res.data.user_id);
+          if(languageId != null && languageId > 0){
+            console.log('ddd')
+            navigate("/quiz")
+          }else{
+          navigate("/languagePage")
+          }
+        }
+        else
+        {
+          
+        }
+    })
+    .catch(err=>console.log(err))
+  },[languageId])
 
  useEffect(()=>
     {
@@ -30,7 +56,8 @@ function LanguageList() {
             user_id : userId,
             l_id : l_id
           });
-          
+          setLanguageId(l_id);
+          console.log('loffff')
       } catch (error) {
           console.error('There was an error sending the ID:', error.message);
       }
