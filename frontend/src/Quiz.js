@@ -16,7 +16,9 @@ function Quiz() {
         return response.json();
       })
       .then(data => {
+        console.log(data);
         setQuestions(data);
+        console.log(`questions ${questions}`)
       })
       .catch(error => {
         console.error('Error fetching data:', error);

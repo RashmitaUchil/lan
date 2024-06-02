@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Im
 import Login from './Login';
 import { useEffect,useState } from 'react';
 import { useUser } from './context/userContext.js';
+import Quiz from './Quiz.js';
 
 
 function App() {
@@ -34,7 +35,8 @@ function App() {
   
       
       <Routes>
-        <Route path="/" element={<SignUp/>} />
+
+        <Route path="/" element={<Quiz/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/languagePage" element={<LanguagesPage/>} />
 

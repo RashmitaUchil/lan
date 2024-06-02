@@ -6,7 +6,8 @@ const Question = require("../model/Questions");
 router3.get(
   "/get_questions", async (req, res) => {
     try {
-      const questions = await Question.findOne({}, 'l_id  category question options answer'); 
+   
+      const questions = await Question.find({}, 'l_id  category question options answer'); 
       res.status(200).json(questions);
     } catch (err) {
       console.error(err.message);
