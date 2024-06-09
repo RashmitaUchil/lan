@@ -9,6 +9,7 @@ import Login from './Login';
 import { useEffect,useState } from 'react';
 import { useUser } from './context/userContext.js';
 import { useLanguageId } from './context/languageIdContext.js'
+import Navigation from './Navigation/navigation.js';
 
 
 function App() {
@@ -39,12 +40,14 @@ function App() {
   
       
       <Routes>
+        
         <Route path="/" element={<SignUp/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/languagePage" element={<LanguagesPage/>} />
         <Route path="/quiz" element={<Quiz/>} />
 
-      </Routes>
+     </Routes>
+  
      
    
   );
