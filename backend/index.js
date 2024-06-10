@@ -26,7 +26,7 @@ app.use(cookieParser());
 app.use(session({
   secret:'secret',
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true ,
   cookie:{
     secure: false,
     maxAge: 1000*60*60*24
@@ -38,7 +38,11 @@ app.use(session({
 app.get("/", (req, res) => {
   if(req.session.userId)
     {
-      return res.json({valid: true, user_id: req.session.userId})
+      return res.json({
+        valid: true,
+         user_id: req.session.userId,
+         userName : req.session.userName
+        })
 
     }
     else{

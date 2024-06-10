@@ -5,98 +5,104 @@ import { useUser } from './context/userContext';
 import { useNavigate } from 'react-router-dom';
 import { useLanguageId } from './context/languageIdContext';
 import styled from 'styled-components';
-import avatar from './img/avatar.png'
+import avatar from './img/avatar.png';
 
 function LanguageList() {
-  const { userId,setUserId } = useUser();
-
-
+  const { userId, setUserId } = useUser();
+  const { userName, setUserName } = useUser();
   const { languageId, setLanguageId } = useLanguageId();
-  
-
   const [languages, setLanguages] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(()=>{
-
+  useEffect(() => {
     axios.get('http://localhost:8081')
-    .then(res=>{
-      if(res.data.valid) {
+      .then(res => {
+        if (res.data.valid) {
           setUserId(res.data.user_id);
-          if(languageId != null && languageId > 0){
-            console.log('ddd')
-            navigate("/quiz")
-          }else{
-          navigate("/languagePage")
+          setUserName(res.data.userName);
+          console.log(res.data.user_id);
+          if (languageId != null && languageId > 0) {
+            navigate("/quiz");
+          } else {
+            navigate("/languagePage");
           }
+        } else {
+          // Handle invalid response
         }
-        else
-        {
-          
-        }
-    })
-    .catch(err=>console.log(err))
-  },[languageId])
+      })
+      .catch(err => console.log(err));
+  }, [languageId, navigate, setUserId, setUserName]);
 
- useEffect(()=>
-    {
-      language()
-      console.log(navigate)
-    },[])
+  useEffect(() => {
+    language();
+    console.log(navigate);
+  }, [navigate]);
 
-  const language = async() =>
-    {
-      const response = await fetch('http://localhost:8081/language/get_languages');
-
-      setLanguages(await response.json())
-      console.log(response);
-    }
-
-    const handleClick = async (l_id) => {
-      try {
-        console.log(userId)
-          const response = await axios.post('http://localhost:8081/language/select_language', { 
-            user_id : userId,
-            l_id : l_id
-          });
-          setLanguageId(l_id);
-          console.log('loffff')
-      } catch (error) {
-          console.error('There was an error sending the ID:', error.message);
-      }
+  const language = async () => {
+    const response = await fetch('http://localhost:8081/language/get_languages');
+    setLanguages(await response.json());
+    console.log(response);
   };
+
+  const logout = async () => {
+    const response = await fetch('http://localhost:8081/language/logout');
+    navigate('/')
+    console.log(response);
+  }
+
+  const handleClick = async (l_id) => {
+    try {
+      console.log(userId);
+      const response = await axios.post('http://localhost:8081/language/select_language', {
+        user_id: userId,
+        l_id: l_id
+      });
+      setLanguageId(l_id);
+      console.log('Language selected');
+    } catch (error) {
+      console.error('There was an error sending the ID:', error.message);
+    }
+  };
+
   return (
- 
-    <div>
+    <Container>
       <Box>
-      <Image src={avatar} alt="User Avatar" />
-      <UserName>Mike</UserName>
-      <SignOutButton onClick={
-        console.log('sss')
-      }>Sign Out</SignOutButton>
-    </Box>
-    <div><center><h1>Select The Language</h1></center>
-    <div className="language-cards-container">
-      <ul className="language-cards-list">
-        {languages.map((language) => (
-          <li className="language-card-item" key={language.l_id} onClick={() => handleClick(language.l_id)}>
-            <div className="language-card">
-              <div className="language-card-content">
-                <h3><i>{language.lang_name}</i></h3>
-                <div className="language-card-flag">
-                  <img src={language.flag_url} alt={`${language.lang_name} Flag`} width="100" height="70" />
+        <Image src={avatar} alt="User Avatar" />
+        <UserName>{userName}</UserName>
+        <SignOutButton onClick={() => 
+          logout()
+        }>Sign Out</SignOutButton>
+      </Box>
+      <Content>
+        <CenterText>Select The Language</CenterText>
+        <div className="language-cards-container">
+          <ul className="language-cards-list">
+            {languages.map((language) => (
+              <li className="language-card-item" key={language.l_id} onClick={() => handleClick(language.l_id)}>
+                <div className="language-card">
+                  <div className="language-card-content">
+                    <h3><i>{language.lang_name}</i></h3>
+                    <div className="language-card-flag">
+                      <img src={language.flag_url} alt={`${language.lang_name} Flag`} width="100" height="70" />
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
-    </div>
-    </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Content>
+    </Container>
   );
 }
 
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  min-height: 100vh;
+`;
 
 const Box = styled.div`
   width: 300px;
@@ -108,6 +114,7 @@ const Box = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-right: 20px;
 `;
 
 const Image = styled.img`
@@ -121,6 +128,7 @@ const Image = styled.img`
 const UserName = styled.h2`
   margin: 0;
   color: #343a40;
+  margin-bottom : 20px;
 `;
 
 const SignOutButton = styled.button`
@@ -139,7 +147,16 @@ const SignOutButton = styled.button`
   }
 `;
 
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;  // Ensure it takes up available space to center properly
+`;
 
-
+const CenterText = styled.h1`
+  text-align: center;
+  margin-bottom: 20px;
+`;
 
 export default LanguageList;

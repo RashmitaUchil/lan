@@ -11,9 +11,13 @@ export const useUser = () => {
 // Create a provider component
 export const UserProvider = ({ children }) => {
     const [userId, setUserId] = useState('');
+    const [userName,setUserName] = useState('');
 
     return (
-        <UserContext.Provider value={{ userId, setUserId }}>
+        <UserContext.Provider value={{ 
+            userId, setUserId,
+            userName,setUserName
+         }}>
             {children}
         </UserContext.Provider>
     );

@@ -14,6 +14,7 @@ import Navigation from './Navigation/navigation.js';
 
 function App() {
   const { userId, setUserId } = useUser();
+  const { userName, setUserName } = useUser();
   const { languageId } = useLanguageId();
   const navigate=useNavigate()
   useEffect(()=>{
@@ -22,6 +23,8 @@ function App() {
     .then(res=>{
       if(res.data.valid) {
           setUserId(res.data.user_id);
+          setUserName(res.data.userName);
+
           if(languageId != null && languageId > 0){
             console.log('ddd')
             navigate("/quiz")

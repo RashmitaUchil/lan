@@ -143,22 +143,40 @@ router.post(
           expiresIn: 3600
         },
         (err, token) => {
-          if (err) throw err;
-          req.session.userId=user.user_id;
-          res.status(200).json({
-            token,
-           
-
-          });
+          if (err) {
+            throw err;
+          }else{
+           req.session.userId = user.user_id;
+          req.session.userName = user.username;
+          
+         req.session.save((err) => {
+          if (err) {
+            console.error('Session save error:', err);
+            return res.status(500).json({ error: 'Session save error' });
+          }
+          console.log(req.session.userName);
+          return res.status(200).json({ token });
+        });
+          
         }
-      );
+      }   );
     } catch (e) {
       console.error(e);
-      res.status(500).json({
+     return res.status(500).json({
         message: "Server Error"
       });
     }
   }
 );
   
+
+router.get('/logout', async (req,res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).send('Failed to destroy session');
+    }
+    res.clearCookie('connect.sid'); // Adjust cookie name based on your session settings
+    res.status(200).send('Logged out');
+  });
+})
 module.exports = router;
