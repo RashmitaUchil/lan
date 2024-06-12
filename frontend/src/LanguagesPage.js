@@ -21,11 +21,9 @@ function LanguageList() {
           setUserId(res.data.user_id);
           setUserName(res.data.userName);
           console.log(res.data.user_id);
-          if (languageId != null && languageId > 0) {
-            navigate("/quiz");
-          } else {
+        
             navigate("/languagePage");
-          }
+          
         } else {
           // Handle invalid response
         }
@@ -58,6 +56,7 @@ function LanguageList() {
         l_id: l_id
       });
       setLanguageId(l_id);
+      navigate('/quiz')
       console.log('Language selected');
     } catch (error) {
       console.error('There was an error sending the ID:', error.message);

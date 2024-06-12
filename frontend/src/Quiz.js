@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import './Quiz.css';
 import axios from 'axios';
 import { useLanguageId } from './context/languageIdContext';
+import { useNavigate } from 'react-router-dom';
 
 function QuizPage() {
   const [index, setIndex] = useState(0);
@@ -10,6 +11,11 @@ function QuizPage() {
   const [score, setScore] = useState(0);
   const [result, setResult] = useState(false);
   const { languageId }= useLanguageId();
+  
+  const navigate = useNavigate();
+
+  
+
 
   const optionRefs = useRef([]);
 
@@ -33,7 +39,16 @@ function QuizPage() {
   const next = () => {
     if (lock === true) {
       if (index === questions.length - 1) {
-        setResult(true);
+      //  if(score >= questions.length / 2){
+          
+          navigate('/congrats',{ state : { 
+               answers : score,
+               total  : questions.length 
+          }});
+          reset();
+     //   }
+      
+       // setResult(true);
         return;
       }
       setIndex((prevIndex) => prevIndex + 1);

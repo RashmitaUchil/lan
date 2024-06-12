@@ -1,0 +1,56 @@
+/* src/CongratulationPage.css */
+
+.congratulation-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('../../img/confetti.gif') no-repeat center center fixed;
+    background-size: cover;
+    text-align: center;
+  }
+  
+  .content {
+    background-color: rgba(255, 255, 255, 0.8); /* semi-transparent white background */
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .congratulations-message {
+    font-size: 3rem;
+    color: #4caf50;
+  }
+  
+  h2 {
+    margin-top: 20px;
+  }
+  
+  .buttons-container {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .blue-button, .white-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .blue-button {
+    background-color: blue;
+    color: white;
+  }
+  
+  .white-button {
+    background-color: white;
+    color: blue;
+    border: 2px solid blue;
+  }
+  

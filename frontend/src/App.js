@@ -10,6 +10,7 @@ import { useEffect,useState } from 'react';
 import { useUser } from './context/userContext.js';
 import { useLanguageId } from './context/languageIdContext.js'
 import Navigation from './Navigation/navigation.js';
+import CongratulationPage from './Components/congratulation/Congratulations.js';
 
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/languagePage" element={<LanguagesPage/>} />
         <Route path="/quiz" element={<Quiz/>} />
+        <Route path= "/congrats" element={<CongratulationPage/>} />
 
      </Routes>
   
