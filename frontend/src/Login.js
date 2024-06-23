@@ -2,7 +2,9 @@ import axios from 'axios'
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css'; // Import CSS file for login page styling
-import { useUser } from './context/userContext';
+import { useUser } from './context/userContext';    
+import toast from 'react-hot-toast';
+
 
 
 const Login = () => {
@@ -25,14 +27,15 @@ const Login = () => {
     .then(res=>{
       if(res.data.token!=null)
         {
+          toast.success("Logged in")
           navigate('/languagePage');
         }
         else{
-          alert("No record")
+          toast.error("Invalid credentials")
         }
         console.log(res);
     })
-    .catch(err=>console.log(err));
+    .catch(err=>toast.error(err.message) );
     // Redirect to dashboard or desired page after login
     
   };
