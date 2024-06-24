@@ -103,9 +103,9 @@ function QuizPage() {
       {!result ? (
         <>
           <h2>{index + 1}. {currentQuestion.question}</h2>
-          <ul>
+          <ul >
             {currentQuestion.options.map((option, idx) => (
-              <li
+              <li 
                 ref={(el) => optionRefs.current[idx] = el}
                 onClick={(e) => { checkAns(e, idx); }}
                 key={idx}

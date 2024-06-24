@@ -26,6 +26,7 @@ const Login = () => {
       if(res.data.token!=null)
         {
           navigate('/languagePage');
+          console.log("res.data.token");
         }
         else{
           alert("No record")

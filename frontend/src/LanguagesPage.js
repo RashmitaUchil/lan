@@ -104,7 +104,8 @@ const Container = styled.div`
 `;
 
 const Box = styled.div`
-  width: 300px;
+  width: 100px;
+  height:120px;
   padding: 20px;
   background-color: #f8f9fa;
   border: 1px solid #dee2e6;
@@ -117,8 +118,8 @@ const Box = styled.div`
 `;
 
 const Image = styled.img`
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 15px;
@@ -127,19 +128,22 @@ const Image = styled.img`
 const UserName = styled.h2`
   margin: 0;
   color: #343a40;
-  margin-bottom : 20px;
+  margin-bottom : 10px;
+  font-size:15px;
 `;
 
 const SignOutButton = styled.button`
   margin-top: auto;
   padding: 10px 20px;
+  width:120px;
   background-color: #dc3545;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 10px;
   transition: background-color 0.3s ease;
+  
 
   &:hover {
     background-color: #c82333;

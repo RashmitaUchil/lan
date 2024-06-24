@@ -67,18 +67,16 @@ const SignUp = () => {
             </div>
             <button type="submit">Sign Up</button>
           </form>
-          {/* <div>
+          { <div>
             Link to the login page
             <p>
               Already have an account?{' '}
-              <a href="/login" onClick={
-                navigate('/login')
-              }>
+              <a href="/login">
                 Login
               </a>
               .
             </p>
-          </div> */}
+          </div> }
         </div>
       </div>
     </div>
