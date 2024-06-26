@@ -9,15 +9,17 @@ const categories = ['Greetings', 'Nouns', 'Verbs', 'Numbers', 'Colours'];
 
 function Category() {
     
-    const { l_id } = useLanguageId();
-    const { user_id } = useUser(); // Assuming useUser provides userId
-
+    
+    const { userId } = useUser(); // Assuming useUser provides userId
+    const { languageId } = useLanguageId();
     const handleCategoryClick = async (category) => {
         try {
+            console.log(userId, languageId,category)
+
             const response = await axios.post('http://localhost:8081/activity/user_activity', {
-                user_id,
-                l_id, 
-                category
+                user_id :userId,
+                l_id :languageId, 
+                category :category
             });
             console.log('User progress updated:', response.data);
         } catch (error) {
@@ -33,7 +35,11 @@ function Category() {
                     <div
                         key={index}
                         className="category-card"
-                        onClick={() => handleCategoryClick(category)}
+                        onClick={() => {
+                            console.log('ksksk')
+                            handleCategoryClick(category)
+                        }
+                        }
                     >
                         {category}
                     </div>
