@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const user = require("./routes/user");
 const language = require("./routes/language");
 const questions = require("./routes/questions");
+const activity=require("./routes/activity");
 const InitiateMongoServer = require("./config/db");
 const cors= require('cors');
 const session= require('express-session');
@@ -54,6 +55,7 @@ app.get("/", (req, res) => {
 app.use("/user", user);
 app.use("/language", language); 
 app.use("/questions", questions);
+app.use("/activity",activity)
 app.listen(PORT, (req, res) => {
   console.log('Server Started at PORT ${PORT}');
 });

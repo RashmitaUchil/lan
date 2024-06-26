@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import SignUp from './Signup.jsx';
 import LanguagesPage from './LanguagesPage.js' 
 import Quiz from './Quiz.js' 
+import Category from './Category.js';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Imported BrowserRouter as Router and corrected Routes import
 import Login from './Login.js';
 import { useEffect } from 'react';
@@ -53,6 +54,7 @@ function App() {
         <Route path="/languagePage" element={<LanguagesPage/>} />
         <Route path="/quiz" element={<Quiz/>} />
         <Route path= "/congrats" element={<CongratulationPage/>} />
+        <Route path="/categories" element={<Category/>} />
   
 
      </Routes>

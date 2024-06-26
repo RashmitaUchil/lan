@@ -29,7 +29,6 @@ const Login = () => {
         {
           toast.success("Logged in")
           navigate('/languagePage');
-          console.log("res.data.token");
         }
         else{
           toast.error("Invalid credentials")

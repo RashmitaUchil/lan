@@ -56,7 +56,7 @@ function LanguageList() {
         l_id: l_id
       });
       setLanguageId(l_id);
-      navigate('/quiz')
+      navigate('/categories')
       console.log('Language selected');
     } catch (error) {
       console.error('There was an error sending the ID:', error.message);
