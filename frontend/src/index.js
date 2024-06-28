@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import { UserProvider } from './context/userContext';
 import { LanguageIdProvider } from './context/languageIdContext';
+import { CategoryProvider } from './context/categoryContext';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -15,13 +16,16 @@ root.render(
 
     <UserProvider>
     <LanguageIdProvider>
+    <CategoryProvider>
      <BrowserRouter>
    
   
     <App/>
   </BrowserRouter>
+  </CategoryProvider>
   </LanguageIdProvider>
   </UserProvider>
+  
 
  
   

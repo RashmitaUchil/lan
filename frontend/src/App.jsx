@@ -13,7 +13,7 @@ import { useLanguageId } from './context/languageIdContext.js'
 import Navigation from './Navigation/navigation.js';
 import CongratulationPage from './Components/congratulation/Congratulations.js';
 import toast, { Toaster } from 'react-hot-toast';
-
+import { LanguageIdProvider } from './context/languageIdContext';
 
 
 function App() {
@@ -45,22 +45,25 @@ function App() {
   },[])
   return (
   
+    <LanguageIdProvider>
       <>
          
-      <Routes>
-        
-        <Route path="/" element={<SignUp/>} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/languagePage" element={<LanguagesPage/>} />
-        <Route path="/quiz" element={<Quiz/>} />
-        <Route path= "/congrats" element={<CongratulationPage/>} />
-        <Route path="/categories" element={<Category/>} />
-  
-
-     </Routes>
-     <Toaster />
-
-     </>
+         <Routes>
+           
+           <Route path="/" element={<SignUp/>} />
+           <Route path="/login" element={<Login />} />
+           <Route path="/languagePage" element={<LanguagesPage/>} />
+           <Route path="/quiz/:category" element={<Quiz/>} />
+           <Route path= "/congrats" element={<CongratulationPage/>} />
+           <Route path="/categories" element={<Category/>} />
+     
+   
+        </Routes>
+        <Toaster />
+   
+        </>
+    </LanguageIdProvider>
+      
   
      
    

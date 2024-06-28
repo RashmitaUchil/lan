@@ -2,21 +2,22 @@ import React, { useRef, useState, useEffect } from 'react';
 import './Quiz.css';
 import axios from 'axios';
 import { useLanguageId } from './context/languageIdContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useUser } from './context/userContext';
+//import { useCategory } from './context/categoryContext';
 
 function QuizPage() {
+  const [loading, setLoading] = useState(true);
   const [index, setIndex] = useState(0);
   const [questions, setQuestions] = useState([]);
   const [lock, setLock] = useState(false);
   const [score, setScore] = useState(0);
   const [result, setResult] = useState(false);
   const { languageId }= useLanguageId();
+  const { userId } = useUser();
+  const { category } = useParams();
   
   const navigate = useNavigate();
-
-  
-
-
   const optionRefs = useRef([]);
 
   const checkAns = (e, selectedIdx) => {
@@ -38,19 +39,29 @@ function QuizPage() {
 
   const next = () => {
     if (lock === true) {
-      if (index === questions.length - 1) {
-      //  if(score >= questions.length / 2){
-          
-          navigate('/congrats',{ state : { 
-               answers : score,
-               total  : questions.length 
-          }});
+      if (index === questions.length - 1)
+         
+        {
+          if (score === questions.length) 
+            {
+        
+              updateUserProgress(true);
+              
+            } 
+          else 
+          {
+            updateUserProgress(false);
+            setResult(true);
+          }
           reset();
-     //   }
-      
-       // setResult(true);
+          navigate('/congrats', 
+            {
+              state: { answers: score, total: questions.length },
+            });
         return;
+        
       }
+      
       setIndex((prevIndex) => prevIndex + 1);
       setLock(false);
       optionRefs.current.forEach((option) => {
@@ -69,37 +80,68 @@ function QuizPage() {
     setResult(false);
   };
 
+  const updateUserProgress = async (isCompleted) => {
+    try {
+      const response = await axios.post('http://localhost:8081/activity/user_activity', {
+        user_id:userId,
+        l_id: languageId,
+        category:category,
+        isCompleted:isCompleted,
+      });
+      console.log('User progress updated:', response.data);
+    } catch (error) {
+      console.error('Error updating user progress:', error);
+    }
+  };
+
   useEffect(() => {
     const fetchQuestions = async () => {
+      setLoading(true);
       try {
         console.log(languageId)
         const response = await axios.get('http://localhost:8081/questions/get_questions',{
         params : {
-          l_id: languageId
+          l_id: languageId,
+          category: category
         }  }   );
-        if (Array.isArray(response.data)) {
+        console.log('Received questions:', response.data);
+        if (Array.isArray(response.data) && response.data.length > 0) {
           setQuestions(response.data);
         } else {
           console.error('Invalid data format:', response.data);
+          setQuestions([]);
         }
+       
       } catch (error) {
         console.error('Error fetching questions:', error);
+        setQuestions([]);
+      }
+      finally {
+        setLoading(false);
       }
     };
 
-    fetchQuestions();
-  }, []);
+    if (languageId && category) {
+      fetchQuestions();
+  } else {
+      console.error(`Missing languageId or category. LanguageId: ${languageId}, Category: ${category}`);
+  }
+  }, [languageId, category]);
+
+  if (loading) {
+    return <div>Loading questions for {category}...</div>;
+  }
 
   if (questions.length === 0) {
-    return <div>Loading...</div>; // Add a loading state
+    return <div>No questions available for the category: {category}</div>; // Add a loading state
   }
 
   const currentQuestion = questions[index];
 
   return (
     <div className='question-list-container'>
-      <h1>QUIZ</h1>
-      <hr />
+      <h1>{category}</h1>
+      
       {!result ? (
         <>
           <h2>{index + 1}. {currentQuestion.question}</h2>

@@ -6,11 +6,13 @@ const Question = require("../model/Questions");
 router3.get(
   "/get_questions", async (req, res) => {
     const langaugeId = req.query.l_id;
+    const category = req.query.category;
     console.log(langaugeId);
     try {
       const questions = await Question.find(
         {
-          l_id : langaugeId
+          l_id : langaugeId,
+          category: category
         }
       );
       res.json(questions);

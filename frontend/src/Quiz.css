@@ -1,9 +1,9 @@
 
 .question-list-container {
-  width: 900px;
-  height: 800px;
+  width: 700px;
+  height: 590px;
   margin:  auto;
-  margin-top:150px;
+  margin-top:100px;
   padding: 40px 50px;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -15,25 +15,27 @@
 
 }
 
-.question-list-container hr{
-  height:2px;
-  border: 1px solid #ccc;
-  background: plum;
-}
+
 
 .question-list-container h2{
   
-  font-size: 28px;
+  font-size: 25px;
   font-weight: 500;
 
+}
+.question-list-container h1{
+  align-self: center;
+  font-size: 30px;
+  font-weight: 500;
+  color: rgb(201, 149, 241);;
 }
 
 .question-list-container ul li{
   display:flex;
   align-items: center;
-  height: 70px;
-  padding-left:15px ;
-  border: 1px solid rgb(209, 16, 187);
+  height: 50px;
+  padding-left:10px ;
+  border: 1px solid rgb(161, 11, 215);
   border-radius: 8px;
   margin-bottom:20px;
   font-size:20px;
@@ -43,11 +45,11 @@
 
 .question-list-container button{
   margin: auto;
-  width: 250px;
-  height: 65px;
-  background: plum;
+  width: 170px;
+  height: 55px;
+  background: rgb(161, 11, 215);
   color: black;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 500;
   border-radius:8px;
   cursor:pointer;

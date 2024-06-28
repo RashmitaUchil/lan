@@ -3,7 +3,11 @@ import React, { createContext, useContext, useState } from 'react';
 const LanguageContext = createContext();
     
 export const useLanguageId = () => {
-    return useContext(LanguageContext);
+    const context = useContext(LanguageContext);
+    if (!context) {
+        throw new Error('useLanguageId must be used within a LanguageIdProvider');
+    }
+    return context;
 };
 
 // Create a provider component

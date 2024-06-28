@@ -26,6 +26,14 @@ router4.post( "/user_activity", async (req, res) => {
             res.status(500).json({ message: 'Error updating user activity', error });
        }
 });
-    
+router4.get('/user_activity', async (req, res) => {
+    const { userId } = req.params;
+    try {
+        const progress = await Activity.find({ userId });
+        res.status(200).json(progress);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 module.exports = router4;
   
