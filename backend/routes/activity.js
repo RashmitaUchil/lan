@@ -1,6 +1,6 @@
 const express = require("express");
 const router4 = express.Router();
-const Activity = require("../model/User_activities");
+const Activity = require("../model/user_activities");
 
 // POST route to update user activity
 router4.post("/user_activity", async (req, res) => {
@@ -24,10 +24,12 @@ router4.post("/user_activity", async (req, res) => {
 });
 
 // GET route to fetch user activities
-router4.get('/user_activity/', async (req, res) => {
-    const { userId } = req.params;
-    try {
+router4.get('/user_activity', async (req, res) => {
+    const  userId = req.query.user_id;
+    try {   
+        console.log(userId)
         const progress = await Activity.find({ user_id: userId });
+        console.log(progress);
         res.status(200).json(progress);
     } catch (error) {
         res.status(500).json({ error: error.message });
