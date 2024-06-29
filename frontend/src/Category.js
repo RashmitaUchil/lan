@@ -19,7 +19,10 @@ function Category() {
     const [completedCategories, setCompletedCategories] = useState([]);
     const navigate = useNavigate();
 
-   
+    const handleChooseDifferentlanguage = () => {
+        // Add your logic here, for example, navigate to language selection page
+        navigate('/languagePage');
+      };
 
     useEffect(() => {
 
@@ -112,6 +115,7 @@ function Category() {
                     </div>
                 ))}
             </div>
+            <button className="lang-button" onClick={handleChooseDifferentlanguage}>Explore other languages</button>
         </div>
     );
 }
