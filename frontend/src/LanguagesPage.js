@@ -73,7 +73,7 @@ function LanguageList() {
         }>Sign Out</SignOutButton>
       </Box>
       <Content>
-        <CenterText>Select The Language</CenterText>
+        <CenterText><i>Select The Language</i></CenterText>
         <div className="language-cards-container">
           <ul className="language-cards-list">
             {languages.map((language) => (

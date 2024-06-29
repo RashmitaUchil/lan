@@ -41,3 +41,8 @@
 .category-card.completed .category-title {
     color: green;
 }
+
+.category-card.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}

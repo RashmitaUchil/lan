@@ -22,7 +22,12 @@ function Category() {
         const fetchCompletedCategories = async () => {
             try {
                 const response = await axios.get(`http://localhost:8081/activity/user_activity/${userId}`);
-                setCompletedCategories(response.data.isCompleted);
+                // setCompletedCategories(response.data.map(activity => ({
+                //     category: activity.category,
+                //     languageId: activity.l_id,
+                //     isCompleted: activity.isCompleted
+                // })));
+                setCompletedCategories(response.data);
             } catch (error) {
                 console.error('Error fetching user progress:', error);
             }
@@ -32,24 +37,40 @@ function Category() {
     }, [userId]);
 
     const handleCategoryClick = async (category) => {
-        // try {
-        //     console.log(userId, languageId,category)
-
-        //     const response = await axios.post('http://localhost:8081/activity/user_activity', {
-        //         user_id :userId,
-        //         l_id :languageId, 
-        //         category :category
-        //     });
-        //     console.log('User progress updated:', response.data);
-        //     setCompletedCategories([...completedCategories, category]);
-        //     console.log(category)
-        //     setCategory(category);
-        //     navigate('/quiz');
-        // } catch (error) {
-        //     console.error('Error updating user progress:', error);
-        // }
+        try {
+            // Check if there's existing user activity for this category and language
+            const existingActivity = completedCategories.find(activity => activity.category === category && activity.languageId === languageId);
+    
+            if (existingActivity && existingActivity.isCompleted) {
+                console.log(`User has already completed ${category} for language ${languageId}`);
+                setCategory(category);
+                navigate('/quiz');
+                return;
+            }
+    
+            // Create new user activity entry
+            const response = await axios.post('http://localhost:8081/activity/user_activity', {
+                user_id: userId,
+                l_id: languageId,
+                category: category,
+                isCompleted: false  // Assuming default isCompleted is false
+            });
+    
+            console.log('User progress updated:', response.data);
+            setCompletedCategories([...completedCategories, { category, languageId }]);
+            
+        } catch (error) {
+            console.error('Error updating user progress:', error);
+        }
         console.log(`Navigating to /quiz/${category}`);
         navigate(`/quiz/${category}`);
+    };
+    
+    const isCategoryDisabled = (index) => {
+        if (index === 0) return false; // Always enable the first category
+        const previousCategory = categories[index - 1];
+        const prevCompleted = completedCategories.find(activity => activity.category === previousCategory && activity.languageId === languageId)?.isCompleted;
+        return !prevCompleted;
     };
 
     return (
@@ -59,8 +80,8 @@ function Category() {
                 {categories.map((category, index) => (
                     <div
                         key={index}
-                        className={`category-card ${completedCategories.includes(category) ? 'completed' : ''}`}
-                        onClick={() => handleCategoryClick(category)}
+                        className={`category-card ${completedCategories.find(activity => activity.category === category && activity.languageId === languageId && activity.isCompleted) ? 'completed' : ''} ${isCategoryDisabled(index) ? 'disabled' : ''}`}
+                        onClick={() => !isCategoryDisabled(index) && handleCategoryClick(category)}
                     >
                         <div className="category-title">{category}</div>
                     </div>

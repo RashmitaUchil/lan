@@ -57,6 +57,6 @@ app.use("/language", language);
 app.use("/questions", questions);
 app.use("/activity",activity)
 app.listen(PORT, (req, res) => {
-  console.log('Server Started at PORT ${PORT}');
+  console.log(`Server Started at PORT ${PORT}`);
 });
 

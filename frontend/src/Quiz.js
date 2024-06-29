@@ -4,9 +4,10 @@ import axios from 'axios';
 import { useLanguageId } from './context/languageIdContext';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useUser } from './context/userContext';
-//import { useCategory } from './context/categoryContext';
+
 
 function QuizPage() {
+
   const [loading, setLoading] = useState(true);
   const [index, setIndex] = useState(0);
   const [questions, setQuestions] = useState([]);
@@ -20,11 +21,16 @@ function QuizPage() {
   const navigate = useNavigate();
   const optionRefs = useRef([]);
 
+  const [selectedAnswerIsCorrect, setSelectedAnswerIsCorrect] = useState(false);
+
   const checkAns = (e, selectedIdx) => {
     if (lock === false) {
       const correctOptionIndex = questions[index].options.indexOf(questions[index].answer);
       
-      if (selectedIdx === correctOptionIndex) {
+      const isCorrect = selectedIdx === correctOptionIndex;
+      setSelectedAnswerIsCorrect(isCorrect);
+
+      if (isCorrect) {
         e.target.classList.add('correct');
         setScore((prev) => prev + 1);
       } else {
@@ -42,17 +48,9 @@ function QuizPage() {
       if (index === questions.length - 1)
          
         {
-          if (score === questions.length) 
-            {
-        
-              updateUserProgress(true);
-              
-            } 
-          else 
-          {
-            updateUserProgress(false);
-            setResult(true);
-          }
+          // const finalScore = score + (selectedAnswerIsCorrect ? 1 : 0);
+          const isPerfectScore = score === questions.length; // +1 because this is checked before incrementing the score
+          updateUserProgress(isPerfectScore);
           reset();
           navigate('/congrats', 
             {
@@ -77,24 +75,29 @@ function QuizPage() {
     setIndex(0);
     setScore(0);
     setLock(false);
-    setResult(false);
+    setSelectedAnswerIsCorrect(false);
   };
 
   const updateUserProgress = async (isCompleted) => {
-    try {
-      const response = await axios.post('http://localhost:8081/activity/user_activity', {
-        user_id:userId,
-        l_id: languageId,
-        category:category,
-        isCompleted:isCompleted,
-      });
-      console.log('User progress updated:', response.data);
-    } catch (error) {
-      console.error('Error updating user progress:', error);
+ 
+      
+    if (isCompleted) {
+      try {
+        const response = await axios.post('http://localhost:8081/activity/user_activity', {
+          user_id: userId,
+          l_id: languageId,
+          category: category,
+          isCompleted: true,
+        });
+        console.log('User progress updated:', response.data);
+      } catch (error) {
+        console.error('Error updating user progress:', error);
+      }
     }
   };
 
   useEffect(() => {
+    
     const fetchQuestions = async () => {
       setLoading(true);
       try {
