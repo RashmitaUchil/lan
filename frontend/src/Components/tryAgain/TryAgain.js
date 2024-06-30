@@ -3,19 +3,20 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import './TryAgain.css';
 import { useCategory } from '../../context/categoryContext';
 import { useLanguageId } from '../../context/languageIdContext';
+import { useParams } from 'react-router-dom';
 
 
 const TryAgainPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { answers, total } = location.state || { answers: 0, total: 0};
-  const { category, setCategory } = useCategory();
+  const { category } = useParams();
+
   const { languageId, setLanguageId } = useLanguageId();
 
   const handleTryAgain = () => {
     // Navigate back to the quiz page for the current category
     setLanguageId(languageId);
-    setCategory(category);
     console.log(languageId, category);
     navigate(`/quiz/${category}`);
   };

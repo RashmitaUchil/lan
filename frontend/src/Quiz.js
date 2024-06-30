@@ -62,7 +62,7 @@ function QuizPage() {
             }
             else
             reset();
-              navigate('/tryagain', 
+              navigate(`/tryagain/${category}`, 
                 {
                   state: { answers: score, total: questions.length },
                 });
@@ -112,6 +112,7 @@ function QuizPage() {
       setLoading(true);
       try {
         console.log(languageId)
+        console.log(category)
         const response = await axios.get('http://localhost:8081/questions/get_questions',{
         params : {
           l_id: languageId,
