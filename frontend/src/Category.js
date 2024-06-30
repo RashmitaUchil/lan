@@ -68,7 +68,7 @@ function Category() {
     
             if (existingActivity && existingActivity.isCompleted) {
                 console.log(`User has already completed ${category} for language ${languageId}`);
-                toast.error("You have already completed this category")
+                toast.success("You have already completed this category")
                 setCategory(category);
                 return;
             }else{

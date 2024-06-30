@@ -51,12 +51,22 @@ function QuizPage() {
           // const finalScore = score + (selectedAnswerIsCorrect ? 1 : 0);
           const isPerfectScore = score === questions.length; // +1 because this is checked before incrementing the score
           updateUserProgress(isPerfectScore);
-          reset();
-          navigate('/congrats', 
+          if(isPerfectScore)
             {
-              state: { answers: score, total: questions.length },
-            });
-        return;
+              reset();
+              navigate('/congrats', 
+                {
+                  state: { answers: score, total: questions.length },
+                });
+            return;
+            }
+            else
+            reset();
+              navigate('/tryagain', 
+                {
+                  state: { answers: score, total: questions.length },
+                });
+          
         
       }
       

@@ -1,0 +1,43 @@
+.try-again-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('../../img/sad.jpg') no-repeat center center fixed;
+    background-size:300px;
+  }
+  
+  .content {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .try-again-message {
+    font-size: 2.5rem;
+    color: red;
+  }
+  
+  .buttons-container {
+    margin-top: 20px;
+  }
+  
+  .blue-button {
+    width: 170px;
+    height: 70px;
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(138, 43, 226);
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+  
+  .blue-button:hover {
+    background-color: darkblue;
+  }
+  

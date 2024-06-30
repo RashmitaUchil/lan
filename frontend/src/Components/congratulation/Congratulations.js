@@ -14,10 +14,7 @@ const CongratulationPage = () => {
     navigate('/categories');
   };
 
-  // const handleRetryQuiz = () => {
-  //   // Add your logic here, for example, navigate to quiz page
-  //   navigate('/quiz');
-  // };
+  
 
   return (
     <div className="congratulation-page">
@@ -26,7 +23,7 @@ const CongratulationPage = () => {
         <h2>You answered {answers} out of {total}</h2>
         <div className="buttons-container">
           <button className="blue-button" onClick={handleChooseDifferentCategory}>Back</button>
-          {/* <button className="white-button" onClick={handleRetryQuiz}>Retry</button> */}
+          
         </div>
       </div>
     </div>

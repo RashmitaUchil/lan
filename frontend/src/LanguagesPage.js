@@ -5,7 +5,7 @@ import { useUser } from './context/userContext';
 import { useNavigate } from 'react-router-dom';
 import { useLanguageId } from './context/languageIdContext';
 import styled from 'styled-components';
-import avatar from './img/avatar.png';
+import avatar1 from './img/avatar1.png';
 
 function LanguageList() {
   const { userId, setUserId } = useUser();
@@ -66,7 +66,7 @@ function LanguageList() {
   return (
     <Container>
       <Box>
-        <Image src={avatar} alt="User Avatar" />
+        <Image src={avatar1} alt="User Avatar" />
         <UserName>{userName}</UserName>
         <SignOutButton onClick={() => 
           logout()
@@ -118,17 +118,17 @@ const Box = styled.div`
 `;
 
 const Image = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height:70px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 15px;
+  margin-bottom: 7px;
 `;
 
 const UserName = styled.h2`
   margin: 0;
   color: #343a40;
-  margin-bottom : 10px;
+  margin-bottom : 5px;
   font-size:15px;
 `;
 

@@ -12,6 +12,7 @@ import { useUser } from './context/userContext.js';
 import { useLanguageId } from './context/languageIdContext.js'
 import Navigation from './Navigation/navigation.js';
 import CongratulationPage from './Components/congratulation/Congratulations.js';
+import TryAgainPage from './Components/tryAgain/TryAgain.js';
 import toast, { Toaster } from 'react-hot-toast';
 import { LanguageIdProvider } from './context/languageIdContext';
 
@@ -55,6 +56,7 @@ function App() {
            <Route path="/languagePage" element={<LanguagesPage/>} />
            <Route path="/quiz/:category" element={<Quiz/>} />
            <Route path= "/congrats" element={<CongratulationPage/>} />
+           <Route path= "/tryagain" element={<TryAgainPage/>} />
            <Route path="/categories" element={<Category/>} />
      
    
