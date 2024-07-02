@@ -1,61 +1,100 @@
-.category-page {
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+  
+  .category-page {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
-}
-
-.category-container {
-    margin-top: 50px;
-    display: flex; /* Change to flex to enable horizontal layout */
-    justify-content: center; /* Center items horizontally */
-    flex-wrap: wrap; /* Allow cards to wrap to the next line */
-    gap: 20px; /* Add gap between cards */
-}
-
-.category-card {
-    width: 250px;
-    height: 250px;
+    padding: 40px 20px;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 40px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  }
+  
+  .category-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .category-card {
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 6px solid grey;
-    transition: border-color 0.3s ease, transform 0.3s ease;
+    border: 6px solid #e0e0e0;
+    transition: all 0.3s ease;
     cursor: pointer;
-}
-
-.category-card.completed {
-    border-color: green;
-}
-
-.category-card:hover {
-    transform: scale(1.1);
-}
-
-.category-title {
-    color: grey;
-    font-size: 20px;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  }
+  
+  .category-card.completed {
+    border-color: #4CAF50;
+  }
+  
+  .category-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+  }
+  
+  .category-title {
+    color: #555;
+    font-size: 1.2rem;
     text-align: center;
-}
-
-.category-card.completed .category-title {
-    color: green;
-}
-
-.category-card.disabled {
+    font-weight: bold;
+    padding: 10px;
+  }
+  
+  .category-card.completed .category-title {
+    color: #4CAF50;
+  }
+  
+  .category-card.disabled {
     opacity: 0.5;
     pointer-events: none;
-}
-
-.lang-button {
-    width: 300px;
-    height: 50px;
-    margin: 200px;
-    padding: 10px 20px;
+    background-color: #f0f0f0;
+  }
+  
+  .lang-button {
+    margin-top: 50px;
+    padding: 15px 30px;
     font-size: 1rem;
     cursor: pointer;
     border: none;
-    border-radius: 5px;
-    background-color: rgb(0, 128, 0);
-}
+    border-radius: 25px;
+    background-color: #4a90e2;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+  
+  .lang-button:hover {
+    background-color: #357abd;
+    transform: translateY(-2px);
+  }
+  
+  @media (max-width: 768px) {
+    .category-card {
+      width: 150px;
+      height: 150px;
+    }
+  
+    .category-title {
+      font-size: 1rem;
+    }
+  }

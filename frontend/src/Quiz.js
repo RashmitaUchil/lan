@@ -58,14 +58,18 @@ function QuizPage() {
                 {
                   state: { answers: score, total: questions.length },
                 });
-            return;
+                return;
             }
             else
-            reset();
-              navigate(`/tryagain/${category}`, 
+            {
+              reset();
+                navigate(`/tryagain/${category}`, 
                 {
                   state: { answers: score, total: questions.length },
                 });
+           
+            }
+            
           
         
       }
@@ -159,7 +163,7 @@ function QuizPage() {
       {!result ? (
         <>
           <h2>{index + 1}. {currentQuestion.question}</h2>
-          <ul >
+          <ul>
             {currentQuestion.options.map((option, idx) => (
               <li 
                 ref={(el) => optionRefs.current[idx] = el}
@@ -175,10 +179,11 @@ function QuizPage() {
           <div className='index'>{index + 1} of {questions.length} questions</div>
         </>
       ) : (
-        <>
-          <h2>Score: {score} out of {questions.length}</h2>
-          <button onClick={reset}>Reset</button>
-        </>
+        <div className="result">
+          <h2>Quiz Completed!</h2>
+          <p>Your score: {score} out of {questions.length}</p>
+          <button onClick={reset}>Try Again</button>
+        </div>
       )}
     </div>
   );

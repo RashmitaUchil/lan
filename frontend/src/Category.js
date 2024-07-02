@@ -103,20 +103,20 @@ function Category() {
 
     return (
         <div className="category-page">
-            <h1><b><i>Select a Category</i></b></h1>
-            <div className="category-container">
-                {categories.map((category, index) => (
-                    <div
-                        key={index}
-                        className={`category-card ${completedCategories.find(activity => activity.category === category && activity.l_id === languageId && activity.isCompleted) ? 'completed' : ''} ${isCategoryDisabled(index) ? 'disabled' : ''}`}
-                        onClick={() => !isCategoryDisabled(index) && handleCategoryClick(category)}
-                    >
-                        <div className="category-title">{category}</div>
-                    </div>
-                ))}
-            </div>
-            <button className="lang-button" onClick={handleChooseDifferentlanguage}>Explore other languages</button>
-        </div>
+  <h1><b><i>Select a Category</i></b></h1>
+  <div className="category-container">
+    {categories.map((category, index) => (
+      <div
+        key={index}
+        className={`category-card ${completedCategories.find(activity => activity.category === category && activity.l_id === languageId && activity.isCompleted) ? 'completed' : ''} ${isCategoryDisabled(index) ? 'disabled' : ''}`}
+        onClick={() => !isCategoryDisabled(index) && handleCategoryClick(category)}
+      >
+        <div className="category-title">{category}</div>
+      </div>
+    ))}
+  </div>
+  <button className="lang-button" onClick={handleChooseDifferentlanguage}>Explore other languages</button>
+</div>
     );
 }
 

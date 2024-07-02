@@ -1,43 +1,106 @@
+/* TryAgain.css */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .try-again-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: url('../../img/sad.jpg') no-repeat center center fixed;
-    background-size:300px;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: 'Arial', sans-serif;
+}
+
+.content {
+  background-color: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 90%;
+  width: 400px;
+  animation: fadeIn 0.8s ease-out;
+}
+
+.try-again-message {
+  font-size: 2.5rem;
+  color: #4a69bd;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.progress {
+  height: 100%;
+  background-color: #4a69bd;
+  transition: width 0.8s ease-in-out;
+}
+
+.motivational-message {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.blue-button, .white-button {
+  padding: 12px 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.blue-button {
+  background-color: #4a69bd;
+  color: white;
+}
+
+.blue-button:hover, .white-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 600px) {
   .content {
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 10px;
+    padding: 30px;
   }
-  
+
   .try-again-message {
-    font-size: 2.5rem;
-    color: red;
+    font-size: 2rem;
   }
-  
-  .buttons-container {
-    margin-top: 20px;
+
+  h2 {
+    font-size: 1.2rem;
   }
-  
-  .blue-button {
-    width: 170px;
-    height: 70px;
-    margin: 10px;
-    padding: 10px 20px;
+
+  .motivational-message {
     font-size: 1rem;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: rgb(138, 43, 226);
-    color: white;
-    transition: background-color 0.3s ease;
   }
-  
-  .blue-button:hover {
-    background-color: darkblue;
+
+  .buttons-container {
+    flex-direction: column;
+    gap: 10px;
   }
-  
+}

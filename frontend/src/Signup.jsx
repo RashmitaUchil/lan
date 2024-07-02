@@ -45,59 +45,55 @@ const SignUp = () => {
 
     <>
 
-    <div className="parent-container">
-      <div className="background">
-        <div className="card">
-          <h2>Sign Up</h2>
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="username">Username:</label>
-              <input
-                type="text"
-                id="username"
-                name="username"
-                value={formData.username}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="email">Email:</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="password">Password:</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-            </div>
-            <button type="submit">Sign Up</button>
-          </form>
-          <div>
-              <p>
-                Already have an account?{' '}
-                <a href="/login" onClick={(e) => {
-                  e.preventDefault();
-                  navigate('/login');
-                }}>
-                  Login
-                </a>
-                .
-              </p>
-            </div>
-        </div>
+<div className="parent-container">
+  <div className="card">
+    <h2>Sign Up</h2>
+    <form onSubmit={handleSubmit}>
+      <div className="input-group">
+        <label htmlFor="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          value={formData.username}
+          onChange={handleChange}
+        />
       </div>
+      <div className="input-group">
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="input-group">
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+        />
+      </div>
+      <button type="submit">Sign Up</button>
+    </form>
+    <div className="login-link">
+      <p>
+        Already have an account?{' '}
+        <a href="/login" onClick={(e) => {
+          e.preventDefault();
+          navigate('/login');
+        }}>
+          Login
+        </a>
+      </p>
     </div>
- 
+  </div>
+</div>
 
     </>
   );

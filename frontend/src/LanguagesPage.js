@@ -64,16 +64,14 @@ function LanguageList() {
   };
 
   return (
-    <Container>
-      <Box>
-        <Image src={avatar1} alt="User Avatar" />
-        <UserName>{userName}</UserName>
-        <SignOutButton onClick={() => 
-          logout()
-        }>Sign Out</SignOutButton>
-      </Box>
-      <Content>
-        <CenterText><i>Select The Language</i></CenterText>
+    <div className="Container">
+  <div className="Box">
+    <img className="Image" src={avatar1} alt="User Avatar" />
+    <h2 className="UserName">{userName}</h2>
+    <button className="SignOutButton" onClick={logout}>Sign Out</button>
+  </div>
+  <div className="Content">
+    <h1 className="CenterText"><i>Select The Language</i></h1>
         <div className="language-cards-container">
           <ul className="language-cards-list">
             {languages.map((language) => (
@@ -90,8 +88,8 @@ function LanguageList() {
             ))}
           </ul>
         </div>
-      </Content>
-    </Container>
+        </div>
+        </div>
   );
 }
 
