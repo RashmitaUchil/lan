@@ -55,7 +55,7 @@ function App() {
            <Route path="/login" element={<Login />} />
            <Route path="/languagePage" element={<LanguagesPage/>} />
            <Route path="/quiz/:category" element={<Quiz/>} />
-           <Route path= "/congrats/:category" element={<CongratulationPage/>} />
+           <Route path= "/congrats" element={<CongratulationPage/>} />
            <Route path= "/tryagain/:category" element={<TryAgainPage/>} />
            <Route path="/categories" element={<Category/>} />
      

@@ -35,7 +35,7 @@ const Login = () => {
         }
         console.log(res);
     })
-    .catch(err=>toast.error(err.message) );
+    .catch(err=>toast.error("Invalid credentials") );
     // Redirect to dashboard or desired page after login
     
   };

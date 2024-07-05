@@ -33,7 +33,7 @@ const SignUp = () => {
           navigate('/login');
         
     })
-    .catch(err=>toast.error(err.message));
+    .catch(err=>toast.error("Incorrect email or password"));
     console.log(formData);
   }
 
