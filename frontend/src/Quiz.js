@@ -58,15 +58,16 @@ function QuizPage() {
                 {
                   state: { answers: score, total: questions.length },
                 });
-                return;
+             
             }
             else
             {
               reset();
-                navigate(`/tryagain/${category}`, 
+              navigate(`/tryagain/${category}`, 
                 {
                   state: { answers: score, total: questions.length },
                 });
+                return;
            
             }
             

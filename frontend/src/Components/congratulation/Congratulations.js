@@ -5,17 +5,14 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Confetti from 'react-confetti';
 import './Congratulations.css';
 
-import { useLanguageId } from '../../context/languageIdContext';
-import { useParams } from 'react-router-dom';
+
 
 const CongratulationPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { answers, total } = location.state || { answers: 0, total: 0 };
   const [windowDimension, setWindowDimension] = useState({ width: window.innerWidth, height: window.innerHeight });
-  const { category } = useParams();
-
-  const { languageId, setLanguageId } = useLanguageId();
+  
   const detectSize = () => {
     setWindowDimension({ width: window.innerWidth, height: window.innerHeight });
   }

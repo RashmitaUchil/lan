@@ -13,9 +13,12 @@ export const useLanguageId = () => {
 // Create a provider component
 export const LanguageIdProvider = ({ children }) => {
     const [languageId, setLanguageId] = useState('');
+    const [languageName, setLanguageName] = useState('');
 
     return (
-        <LanguageContext.Provider value={{ languageId, setLanguageId }}>
+        <LanguageContext.Provider value={{ 
+            languageId, setLanguageId,
+            languageName, setLanguageName}}>
             {children}
         </LanguageContext.Provider>
     );

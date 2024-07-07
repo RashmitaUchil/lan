@@ -27,7 +27,7 @@ router.post(
     async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({
+            return res.status(400).send({
                 errors: errors.array()
             });
         }
@@ -43,8 +43,8 @@ router.post(
                 email
             });
             if (user) {
-                return res.status(400).json({
-                    msg: "Email is already registered"
+                return res.status(400).send({
+                    message: "Email is already registered"
                 });
             }
 
@@ -52,8 +52,8 @@ router.post(
                 username
             });
             if (user) {
-                return res.status(400).json({
-                    msg: "Username Already Exists"
+                return res.status(400).send({
+                  message: "Username Already Exists"
                 });
             }
             const userId = await v4();
@@ -91,7 +91,7 @@ router.post(
             );
         } catch (err) {
             console.log(err.message);
-            res.status(500).send("Error in Saving");
+            res.status(500).send({message:"Error in Saving"});
         }
     }
 );
@@ -109,7 +109,7 @@ router.post(
   
       if (!errors.isEmpty()) {
         
-        return res.status(400).json({
+        return res.status(400).send({
           errors: errors.array()
         });
       }
@@ -121,13 +121,13 @@ router.post(
       });
       
       if (!user)
-        return res.status(400).json({
+        return res.status(400).send({
           message: "User Does Not Exist"
         });
 
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch)
-        return res.status(400).json({
+        return res.status(400).send({
           message: "Incorrect Password !"
         });
 
@@ -152,7 +152,7 @@ router.post(
          req.session.save((err) => {
           if (err) {
             console.error('Session save error:', err);
-            return res.status(500).json({ error: 'Session save error' });
+            return res.status(500).send({ error: 'Session save error' });
           }
           console.log(req.session.userName);
           return res.status(200).json({ token });
@@ -162,7 +162,7 @@ router.post(
       }   );
     } catch (e) {
       console.error(e);
-     return res.status(500).json({
+     return res.status(500).send({
         message: "Server Error"
       });
     }
