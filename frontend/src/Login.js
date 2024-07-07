@@ -35,7 +35,7 @@ const Login = () => {
         }
         console.log(res);
     })
-    .catch(err=>toast.error("username or password incorrect") );
+    .catch(err=>toast.error(err.message) );
     // Redirect to dashboard or desired page after login
     
   };

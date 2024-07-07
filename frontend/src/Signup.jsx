@@ -33,7 +33,11 @@ const SignUp = () => {
           navigate('/login');
         
     })
+<<<<<<< HEAD
     .catch(err=>toast.error("username or email already registered"));
+=======
+    .catch(err=>toast.error("Incorrect email or password"));
+>>>>>>> eba68ab2ee1560ba75c2b22d67afa5bb696a5a0d
     console.log(formData);
   }
 
